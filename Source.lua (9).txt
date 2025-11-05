@@ -62,17 +62,23 @@ end
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 550
 
+local function GetThemeColor(themeColor)
+	if typeof(themeColor) == "table" and themeColor.Type == "Gradient" then
+		return Color3.fromRGB(255, 255, 255)
+	end
+	return themeColor
+end
+
 local function SetProps(Instance, props)
-  if props and typeof(props) == "table" then
-    table.foreach(props, function(prop, value)
-      if prop == "BackgroundColor3" and typeof(value) == "table" and value.Type == "Gradient" then
-        Instance[prop] = Color3.fromRGB(255, 255, 255)
-      else
-        Instance[prop] = value
-      end
-    end)
-  end
-  return Instance
+	if props and typeof(props) == "table" then
+		table.foreach(props, function(prop, value)
+			if prop == "BackgroundColor3" then
+				value = GetThemeColor(value)
+			end
+			Instance[prop] = value
+		end)
+	end
+	return Instance
 end
 
 local function SetChildren(Instance, children)
@@ -427,18 +433,18 @@ function redzLib:SetTheme(themeName)
     Intance.TextColor3 = Theme["Color Dark Text"]
   end)
 table.foreach(Save.Theme, function(_, instance)
-    if not instance or not instance:IsA("GuiObject") then return end
-    local themeColor = Theme["Color Theme"]
+	if not instance or not instance:IsA("GuiObject") then return end
+	local themeColor = Theme["Color Theme"]
 
-    if typeof(themeColor) == "table" and themeColor.Type == "Gradient" then
-        instance.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        local grad = instance:FindFirstChildOfClass("UIGradient") or Instance.new("UIGradient", instance)
-        grad.Color = themeColor.Color
-    else
-        instance.BackgroundColor3 = themeColor
-        local oldGrad = instance:FindFirstChildOfClass("UIGradient")
-        if oldGrad then oldGrad:Destroy() end
-    end
+	if typeof(themeColor) == "table" and themeColor.Type == "Gradient" then
+		instance.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		local grad = instance:FindFirstChildOfClass("UIGradient") or Instance.new("UIGradient", instance)
+		grad.Color = themeColor.Color
+	else
+		instance.BackgroundColor3 = themeColor
+		local oldGrad = instance:FindFirstChildOfClass("UIGradient")
+		if oldGrad then oldGrad:Destroy() end
+	end
 end)
   table.foreach(Save.Toggle, function(_,table)
     if not table[1] then return end
