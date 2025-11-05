@@ -65,7 +65,11 @@ local UIScale = ViewportSize.Y / 550
 local function SetProps(Instance, props)
   if props and typeof(props) == "table" then
     table.foreach(props, function(prop, value)
-      Instance[prop] = value
+      if prop == "BackgroundColor3" and typeof(value) == "table" and value.Type == "Gradient" then
+        Instance[prop] = Color3.fromRGB(255, 255, 255)
+      else
+        Instance[prop] = value
+      end
     end)
   end
   return Instance
