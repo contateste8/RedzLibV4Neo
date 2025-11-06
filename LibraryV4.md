@@ -31,7 +31,7 @@ Instance:Visible(false)
 ## Window
 Create a Window
 ```lua
-local Window = redzlib:MakeWindow({
+local Window = Library:MakeWindow({
   Title = "REDz HUB : Example",
   SubTitle = "by : redz9999",
   LoadText = "redz Hub",
