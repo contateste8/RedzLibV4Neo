@@ -17,8 +17,8 @@ local Themes = {
   },
 
   ["ProtectionMenu"] = {
-    ["Color Hub 1"] = Color3.fromRGB(30, 30, 30),
-    ["Color Hub 2"] = Color3.fromRGB(40, 40, 40),
+    ["Color Hub 1"] = Color3.fromRGB(25, 25, 25),
+    ["Color Hub 2"] = Color3.fromRGB(35, 35, 35),
     ["Color Theme"] = Color3.fromRGB(189, 246, 254),
     ["Color Text"] = Color3.fromRGB(240, 240, 240),
     ["Color Dark Text"] = Color3.fromRGB(200, 200, 200),
